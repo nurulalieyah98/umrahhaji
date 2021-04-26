@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "606389515367",
+    "project_id": "umrahhaji-67dca",
+    "storage_bucket": "umrahhaji-67dca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606389515367:android:14af68a7bd770c41e490c2",
+        "android_client_info": {
+          "package_name": "com.example.umrahhaji"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606389515367-u07vbra1me39l7v6q255jfqekjq92hh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCcLOYWR-dmss1xXfPfOGdAUGhZGckKpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606389515367-u07vbra1me39l7v6q255jfqekjq92hh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
