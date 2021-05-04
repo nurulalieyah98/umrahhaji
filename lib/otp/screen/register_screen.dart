@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:umrahhaji/screen/loggedIn_screen.dart';
+import 'package:umrahhaji/otp/screen/loggedIn_screen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -63,6 +63,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      SizedBox(height: 50.0),
+                      // SvgPicture.asset(
+                      //   "assets/icons/signup.svg",
+                      //   height: 0.45,
+                      // ),
+                      Container(
+                          width: 200.0,
+                          height: 200.0,
+                          decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: new AssetImage(
+                                      'assets/images/signup.jpg')))),
+                      SizedBox(height: 30.0),
                       Container(
                           child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -73,9 +88,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           textInputAction: TextInputAction.next,
                           onEditingComplete: () => node.nextFocus(),
                           decoration: InputDecoration(
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.never,
-                              labelText: 'Name'),
+                              labelText: 'Name',
+                              border: OutlineInputBorder(),
+                              suffixIcon: Icon(Icons.person)),
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Please enter a name';
@@ -95,10 +110,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           textInputAction: TextInputAction.done,
                           onFieldSubmitted: (_) => node.unfocus(),
                           decoration: InputDecoration(
-                              hintText: 'Cell Number',
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.never,
-                              labelText: 'Phone Number'),
+                              labelText: 'Phone Number',
+                              hintText: 'Eg : 0123456789',
+                              border: OutlineInputBorder(),
+                              suffixIcon: Icon(Icons.phone_rounded)),
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Please enter a phone number';
@@ -108,7 +123,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       )),
                       Container(
-                          margin: EdgeInsets.only(top: 40, bottom: 5),
+                          // margin: EdgeInsets.only(top: 40, bottom: 5),
+                          margin: EdgeInsets.only(top: 20, bottom: 5),
                           child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
@@ -359,13 +375,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() {
       isLoading = true;
     });
-    debugPrint('Gideon test 1');
+    debugPrint('test 1');
     var phoneNumber = '+60' + cellnumberController.text.trim();
-    debugPrint('Gideon test 2');
+    // var phoneNumber = cellnumberController.text.trim();
+    debugPrint('test 2');
     var verifyPhoneNumber = _auth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (phoneAuthCredential) {
-        debugPrint('Gideon test 3');
+        debugPrint('test 3');
         //auto code complete (not manually)
         _auth.signInWithCredential(phoneAuthCredential).then((user) async => {
               if (user != null)
@@ -402,7 +419,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           })
                 }
             });
-        debugPrint('Gideon test 4');
+        debugPrint('test 4');
       },
       verificationFailed: (FirebaseAuthException error) {
         debugPrint('Error logging in' + error.message);
@@ -412,7 +429,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       codeSent: (String verificationId, [int forceResendingToken]) async {
         // this.actualCode = verificationId;
-        debugPrint('Gideon test 6');
+        debugPrint('test 6');
         setState(() {
           print('Code sent to $phoneNumber');
           isLoading = false;
@@ -420,7 +437,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         });
       },
       codeAutoRetrievalTimeout: (String verificationId) {
-        debugPrint('Gideon test 7');
+        debugPrint('test 7');
         setState(() {
           isLoading = false;
           verificationCode = verificationId;
@@ -428,8 +445,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       timeout: Duration(seconds: 120),
     );
-    debugPrint('Gideon test 7');
+    debugPrint('test 7');
     await verifyPhoneNumber;
-    debugPrint('Gideon test 8');
+    debugPrint('test 8');
   }
 }

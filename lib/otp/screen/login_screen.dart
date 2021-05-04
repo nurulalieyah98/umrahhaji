@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:umrahhaji/screen/register_screen.dart';
-import 'package:umrahhaji/screen/loggedIn_screen.dart';
+import 'package:umrahhaji/otp/screen/register_screen.dart';
+import 'package:umrahhaji/otp/screen/user_profile.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -38,7 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (BuildContext context) => LoggedInScreen(),
+          // builder: (BuildContext context) => LoggedInScreen(),
+          builder: (BuildContext context) => UserProfile(),
         ),
         (route) => false,
       );
@@ -63,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: new AppBar(
-          title: Text('Login Screen'),
+          title: Text('Login with SMS'),
         ),
         body: ListView(children: [
           new Column(
@@ -72,6 +73,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      SizedBox(height: 50.0),
+                      // SvgPicture.asset(
+                      //   "assets/icons/signup.svg",
+                      //   height: 0.45,
+                      // ),
+                      Container(
+                          width: 200.0,
+                          height: 200.0,
+                          decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: new AssetImage(
+                                      'assets/images/login.jpg')))),
+                      SizedBox(height: 30.0),
                       Container(
                           child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -80,18 +96,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           enabled: !isLoading,
                           controller: numberController,
                           keyboardType: TextInputType.phone,
-                          decoration:
-                              InputDecoration(labelText: 'Phone Number'),
-                          // ignore: missing_return
+                          decoration: InputDecoration(
+                              labelText: 'Phone Number',
+                              hintText: 'Eg : 0123456789',
+                              border: OutlineInputBorder(),
+                              suffixIcon: Icon(Icons.phone_rounded)),
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Please enter phone number';
                             }
+                            return null;
                           },
                         ),
                       )),
                       Container(
-                          margin: EdgeInsets.only(top: 40, bottom: 5),
+                          // margin: EdgeInsets.only(top: 40, bottom: 5),
+                          margin: EdgeInsets.only(top: 20, bottom: 5),
                           child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
@@ -248,7 +268,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     MaterialPageRoute(
                                                       builder: (BuildContext
                                                               context) =>
-                                                          LoggedInScreen(),
+                                                          // LoggedInScreen(),
+                                                          UserProfile(),
                                                     ),
                                                     (route) => false,
                                                   )
@@ -355,6 +376,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     var phoneNumber = '+60 ' + numberController.text.trim();
+    // var phoneNumber = numberController.text.trim();
 
     //first we will check if a user with this cell number exists
     var isValidUser = false;
@@ -387,7 +409,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => LoggedInScreen(),
+                        builder: (BuildContext context) => UserProfile(),
                       ),
                       (route) => false,
                     )
