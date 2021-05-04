@@ -22,7 +22,7 @@ class LoggedInWidget extends StatelessWidget {
           SizedBox(height: 8),
           CircleAvatar(
             maxRadius: 25,
-            // backgroundImage: NetworkImage(user.photoURL),
+            backgroundImage: NetworkImage(user.photoURL),
           ),
           SizedBox(height: 8),
           Text(
