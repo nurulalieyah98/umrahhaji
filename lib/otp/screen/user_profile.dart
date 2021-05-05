@@ -74,6 +74,9 @@ class _UserProfileState extends State<UserProfile> {
                     //     ' uid:' +
                     //     (_auth.currentUser.uid != null ? _auth.currentUser.uid : '') +
                     //     ')'),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     ElevatedButton(
                         onPressed: () => {
                               //sign out
