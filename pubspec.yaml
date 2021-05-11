@@ -35,6 +35,15 @@ dependencies:
   flutter_bloc: ^7.0.0
   flutter_spinkit: ^5.0.0
   carousel_pro: ^1.0.0
+  http:
+
+  #download ebook
+  path_provider:
+  progress_dialog:
+  dio:
+  flutter_downloader: ^1.6.0
+  permission_handler: ^7.1.0
+  ext_storage: ^1.0.3
 
   #image and icons
   flutter_svg: ^0.22.0

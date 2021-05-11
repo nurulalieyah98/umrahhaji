@@ -1,12 +1,16 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:flutter/material.dart';
+// import 'package:flutter_downloader/flutter_downloader.dart';
 // import 'package:umrahhaji/otp/screen/login_screen.dart';
 // import 'package:umrahhaji/otp/screen/user_profile.dart';
 
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   await Firebase.initializeApp();
+//   await FlutterDownloader.initialize(
+//       debug: true // optional: set false to disable printing logs to console
+//       );
 //   runApp(MyApp());
 // }
 
@@ -17,7 +21,7 @@
 //     return MaterialApp(
 //         title: 'Umrah Haji',
 //         theme: ThemeData(
-//           primaryColor: Colors.greenAccent,
+//           primaryColor: Colors.teal,
 //           primarySwatch: Colors.orange,
 //           inputDecorationTheme:
 //               InputDecorationTheme(labelStyle: TextStyle(color: Colors.grey)),
@@ -65,11 +69,15 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await FlutterDownloader.initialize(
+      debug: true // optional: set false to disable printing logs to console
+      );
   runApp(MyApp());
 }
 
@@ -80,7 +88,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Umrah Haji',
         theme: ThemeData(
-          primaryColor: Colors.greenAccent,
+          primaryColor: Colors.teal,
           primarySwatch: Colors.orange,
           inputDecorationTheme:
               InputDecorationTheme(labelStyle: TextStyle(color: Colors.grey)),

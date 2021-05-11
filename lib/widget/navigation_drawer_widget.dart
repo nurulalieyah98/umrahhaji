@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
 import 'package:umrahhaji/pages/favourite_page.dart';
+import 'package:umrahhaji/pages/modul%20ebook/ebook2.dart';
 import 'package:umrahhaji/widget/drawer_header.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -159,7 +160,12 @@ class NavigationDrawer extends StatelessWidget {
               ),
             ]),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Ebook()),
+            );
+          },
           leading: Icon(
             Icons.cloud_download,
             color: Colors.black,
