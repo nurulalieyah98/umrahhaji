@@ -45,6 +45,12 @@ dependencies:
   permission_handler: ^7.1.0
   ext_storage: ^1.0.3
 
+  #youtube api
+  youtube_player_flutter: ^8.0.0
+
+  #hyperlink text
+  url_launcher: ^6.0.3
+  
   #image and icons
   flutter_svg: ^0.22.0
 

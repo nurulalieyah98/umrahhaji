@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
+import 'package:umrahhaji/pages/umrahhaji_tv/list_screen.dart';
 import 'package:umrahhaji/pages/favourite_page.dart';
 import 'package:umrahhaji/pages/modul%20ebook/ebook2.dart';
 import 'package:umrahhaji/widget/drawer_header.dart';
@@ -122,7 +123,12 @@ class NavigationDrawer extends StatelessWidget {
           ],
         ),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ListScreen()),
+            );
+          },
           leading: Icon(
             Icons.video_collection,
             color: Colors.black,

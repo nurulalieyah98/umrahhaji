@@ -55,58 +55,60 @@ class _EbookState extends State<Ebook> {
         title: Text("Ebook Percuma"),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image(
-              image: AssetImage('assets/images/ebook.jpeg'),
-              width: 400.0,
-              height: 250.0,
-              alignment: Alignment.center,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-              child: Text("Muat Turun"),
-              onPressed: () async {
-                final status = await Permission.storage.request();
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image(
+                image: AssetImage('assets/images/ebook.jpeg'),
+                width: 400.0,
+                height: 250.0,
+                alignment: Alignment.center,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                child: Text("Muat Turun"),
+                onPressed: () async {
+                  final status = await Permission.storage.request();
 
-                if (status.isGranted) {
-                  // Future<String> _getPath() {
-                  //   return ExtStorage.getExternalStoragePublicDirectory(
-                  //       ExtStorage.DIRECTORY_DOWNLOADS);
-                  // }
-                  // void externalDir() async {
-                  //   await ExtStorage.getExternalStoragePublicDirectory(
-                  //       ExtStorage.DIRECTORY_DOWNLOADS); // /storage/emulated/0/Download
-                  // }
-                  final externalDir =
-                      await new Directory('/storage/emulated/0/Download')
-                          .create(recursive: true);
-                  print(externalDir);
+                  if (status.isGranted) {
+                    // Future<String> _getPath() {
+                    //   return ExtStorage.getExternalStoragePublicDirectory(
+                    //       ExtStorage.DIRECTORY_DOWNLOADS);
+                    // }
+                    // void externalDir() async {
+                    //   await ExtStorage.getExternalStoragePublicDirectory(
+                    //       ExtStorage.DIRECTORY_DOWNLOADS); // /storage/emulated/0/Download
+                    // }
+                    final externalDir =
+                        await new Directory('/storage/emulated/0/Download')
+                            .create(recursive: true);
+                    print(externalDir);
 
-                  final id = await FlutterDownloader.enqueue(
-                    url:
-                        "https://umrahhaji.com/wp-content/uploads/2021/03/EBOOK-INFOGRAFIK-UMRAH-FEB-2021.pdf",
-                    savedDir: externalDir.path,
-                    fileName: "EBOOK-INFOGRAFIK-UMRAH-FEB-2021.pdf",
-                    showNotification: true,
-                    openFileFromNotification: true,
-                  );
-                } else {
-                  print("Permission deined");
-                }
-              },
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Downloading file : " + "$progress" + "%",
-              style: TextStyle(fontSize: 15),
-            ),
-          ],
+                    final id = await FlutterDownloader.enqueue(
+                      url:
+                          "https://umrahhaji.com/wp-content/uploads/2021/03/EBOOK-INFOGRAFIK-UMRAH-FEB-2021.pdf",
+                      savedDir: externalDir.path,
+                      fileName: "EBOOK-INFOGRAFIK-UMRAH-FEB-2021.pdf",
+                      showNotification: true,
+                      openFileFromNotification: true,
+                    );
+                  } else {
+                    print("Permission deined");
+                  }
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Downloading file : " + "$progress" + "%",
+                style: TextStyle(fontSize: 15),
+              ),
+            ],
+          ),
         ),
       ),
     );
