@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:umrahhaji/otp/screen/loggedIn_screen.dart';
+import 'package:umrahhaji/otp/screen/user_profile.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -277,7 +277,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                     MaterialPageRoute(
                                                       builder: (BuildContext
                                                               context) =>
-                                                          LoggedInScreen(),
+                                                          UserProfile(),
                                                     ),
                                                     (route) => false,
                                                   )
@@ -407,7 +407,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      LoggedInScreen(),
+                                      UserProfile(),
                                 ),
                                 (route) => false,
                               );

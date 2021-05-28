@@ -21,6 +21,7 @@ class _VideoScreenState extends State<VideoScreen> {
       flags: YoutubePlayerFlags(
         mute: false,
         autoPlay: true,
+        enableCaption: true,
       ),
     );
   }

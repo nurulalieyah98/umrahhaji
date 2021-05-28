@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
+import 'package:umrahhaji/pages/product/product.dart';
 import 'package:umrahhaji/pages/umrahhaji_tv/list_screen.dart';
 import 'package:umrahhaji/pages/favourite_page.dart';
 import 'package:umrahhaji/pages/modul%20ebook/ebook2.dart';
@@ -148,7 +149,12 @@ class NavigationDrawer extends StatelessWidget {
                   Icons.shopping_cart,
                   color: Colors.transparent,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProductPage()),
+                  );
+                },
                 title: Text("Senarai Produk"),
               ),
               ListTile(

@@ -50,6 +50,9 @@ dependencies:
 
   #hyperlink text
   url_launcher: ^6.0.3
+
+  #web view
+  webview_flutter: ^2.0.7
   
   #image and icons
   flutter_svg: ^0.22.0
