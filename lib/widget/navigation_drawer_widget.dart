@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
 import 'package:umrahhaji/pages/product/product.dart';
+import 'package:umrahhaji/pages/soal_jawab/qna_haji/list_qna_haji.dart';
+import 'package:umrahhaji/pages/soal_jawab/qna_qurban/list_qna_qurban.dart';
+import 'package:umrahhaji/pages/soal_jawab/qna_ramadhan/no_post.dart';
+import 'package:umrahhaji/pages/soal_jawab/qna_umrah/list_qna_umrah.dart';
+import 'package:umrahhaji/pages/soal_jawab/qna_umrah_haji/list_qna_umrah_haji.dart';
 import 'package:umrahhaji/pages/umrahhaji_tv/list_screen.dart';
 import 'package:umrahhaji/pages/favourite_page.dart';
 import 'package:umrahhaji/pages/modul%20ebook/ebook2.dart';
@@ -94,7 +99,12 @@ class NavigationDrawer extends StatelessWidget {
                 Icons.question_answer,
                 color: Colors.transparent,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QnAUmrah()),
+                );
+              },
               title: Text("Q&A Fiqh Umrah"),
             ),
             ListTile(
@@ -102,7 +112,12 @@ class NavigationDrawer extends StatelessWidget {
                 Icons.question_answer,
                 color: Colors.transparent,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QnAHaji()),
+                );
+              },
               title: Text("Q&A Fiqh Haji"),
             ),
             ListTile(
@@ -110,7 +125,25 @@ class NavigationDrawer extends StatelessWidget {
                 Icons.question_answer,
                 color: Colors.transparent,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QnAUmrahHaji()),
+                );
+              },
+              title: Text("Q&A Fiqh Umrah Haji"),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.question_answer,
+                color: Colors.transparent,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QnAQurban()),
+                );
+              },
               title: Text("Q&A Fiqh Qurban"),
             ),
             ListTile(
@@ -118,7 +151,12 @@ class NavigationDrawer extends StatelessWidget {
                 Icons.question_answer,
                 color: Colors.transparent,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NoPostQnARamadhan()),
+                );
+              },
               title: Text("Q&A Fiqh Ramadhan"),
             ),
           ],
@@ -157,19 +195,19 @@ class NavigationDrawer extends StatelessWidget {
                 },
                 title: Text("Senarai Produk"),
               ),
-              ListTile(
-                leading: Icon(
-                  Icons.shopping_cart,
-                  color: Colors.transparent,
-                ),
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => FavouritesPage()),
-                  // );
-                },
-                title: Text("Troli"),
-              ),
+              // ListTile(
+              //   leading: Icon(
+              //     Icons.shopping_cart,
+              //     color: Colors.transparent,
+              //   ),
+              //   onTap: () {
+              //     // Navigator.push(
+              //     //   context,
+              //     //   MaterialPageRoute(builder: (context) => FavouritesPage()),
+              //     // );
+              //   },
+              //   title: Text("Troli"),
+              // ),
             ]),
         ListTile(
           onTap: () {

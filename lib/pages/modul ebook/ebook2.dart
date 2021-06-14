@@ -89,13 +89,15 @@ class _EbookState extends State<Ebook> {
 
                     final id = await FlutterDownloader.enqueue(
                       url:
-                          "https://umrahhaji.com/wp-content/uploads/2021/03/EBOOK-INFOGRAFIK-UMRAH-FEB-2021.pdf",
+                          // "https://umrahhaji.com/wp-content/uploads/2021/03/EBOOK-INFOGRAFIK-UMRAH-FEB-2021.pdf", (link lama)
+                          "https://umrahhaji.com/wp-content/uploads/2021/06/EBOOK-INFOGRAFIK-UMRAH-2021.pdf",
                       savedDir: externalDir.path,
-                      fileName: "EBOOK-INFOGRAFIK-UMRAH-FEB-2021.pdf",
+                      fileName: "EBOOK-INFOGRAFIK-UMRAH-2021.pdf",
                       showNotification: true,
                       openFileFromNotification: true,
                     );
                   } else {
+                    Text("Unsuccessful to download");
                     print("Permission deined");
                   }
                 },

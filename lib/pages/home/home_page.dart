@@ -53,6 +53,7 @@
 
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:umrahhaji/pages/soal_jawab/qna_umrah_haji/list_qna_umrah_haji.dart';
 import 'package:umrahhaji/widget/navigation_drawer_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -212,6 +213,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => QnAUmrahHaji()),
+                      );
                       // Respond to button press
                     },
                     icon: Icon(Icons.book, size: 18),
