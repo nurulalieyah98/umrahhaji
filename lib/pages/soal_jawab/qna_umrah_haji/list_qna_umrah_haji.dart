@@ -27,7 +27,12 @@ class _QnAUmrahHajiState extends State<QnAUmrahHaji> {
 
                   return PostTile(
                     href: wppost["_links"]["wp:featuredmedia"][0]["href"],
-                    title: wppost["title"]["rendered"].replaceAll("#038;", ""),
+                    title: wppost["title"]["rendered"]
+                        .replaceAll("&#038;", "")
+                        .replaceAll("&#8220;", "")
+                        .replaceAll("&#8221;", "")
+                        .replaceAll("&#8216;", "")
+                        .replaceAll("&#8217;", "'"),
                     desc: wppost["excerpt"]["rendered"],
                     content: wppost["content"]["rendered"],
                   );

@@ -5,6 +5,7 @@ import 'package:umrahhaji/pages/soal_jawab/qna_haji/list_qna_haji.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_qurban/list_qna_qurban.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_ramadhan/no_post.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_umrah/list_qna_umrah.dart';
+import 'package:umrahhaji/pages/soal_jawab/qna_umrah/testing.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_umrah_haji/list_qna_umrah_haji.dart';
 import 'package:umrahhaji/pages/umrahhaji_tv/list_screen.dart';
 import 'package:umrahhaji/pages/favourite_page.dart';
@@ -223,7 +224,12 @@ class NavigationDrawer extends StatelessWidget {
           title: Text("Modul eBook"),
         ),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TestingQnAUmrah()),
+            );
+          },
           leading: Icon(
             Icons.phone,
             color: Colors.black,

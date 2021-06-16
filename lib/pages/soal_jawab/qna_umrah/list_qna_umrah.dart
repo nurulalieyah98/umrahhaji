@@ -27,7 +27,9 @@ class _QnAUmrahState extends State<QnAUmrah> {
 
                   return PostTile(
                     href: wppost["_links"]["wp:featuredmedia"][0]["href"],
-                    title: wppost["title"]["rendered"].replaceAll("#038;", ""),
+                    title: wppost["title"]["rendered"]
+                        .replaceAll("&#038;", "")
+                        .replaceAll("&#8217;", "'"),
                     desc: wppost["excerpt"]["rendered"],
                     content: wppost["content"]["rendered"],
                   );
@@ -56,42 +58,47 @@ class _PostTileState extends State<PostTile> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DetailsQnAUmrah(
-                        imageUrl: imageUrl,
-                        title: widget.title,
-                        desc: widget.content,
-                      )));
-        },
-        child: Container(
-            margin: EdgeInsets.only(top: 8),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FutureBuilder(
-                    future: fetchWpPostImageUrl(widget.href),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        imageUrl = snapshot.data["media_details"]["sizes"]
-                            ["thumbnail"]["source_url"];
-                        return Image.network(snapshot.data["media_details"]
-                            ["sizes"]["thumbnail"]["source_url"]);
-                      }
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailsQnAUmrah(
+                      imageUrl: imageUrl,
+                      title: widget.title,
+                      desc: widget.content,
+                    )));
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 8),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Divider(),
+            Text(widget.title, style: TextStyle(fontSize: 16)),
+            SizedBox(height: 8),
+            Center(
+              child: FutureBuilder(
+                  future: fetchWpPostImageUrl(widget.href),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      imageUrl = snapshot.data["media_details"]["sizes"]
+                          ["thumbnail"]["source_url"];
+                      return Image.network(snapshot.data["media_details"]
+                          ["sizes"]["thumbnail"]["source_url"]);
+                    }
 
-                      return Center(child: CircularProgressIndicator());
-                    }),
-                SizedBox(height: 8),
-                Text(widget.title, style: TextStyle(fontSize: 16)),
-                SizedBox(height: 5),
-                Html(
-                  data: widget.desc,
-                  // style: TextStyle(fontSize: 12)
-                )
-              ],
-            )));
+                    return Center(child: CircularProgressIndicator());
+                  }),
+            ),
+            SizedBox(height: 5),
+            Html(
+              data: widget.desc,
+              // style: TextStyle(fontSize: 12)
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
