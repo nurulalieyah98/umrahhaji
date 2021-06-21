@@ -74,7 +74,9 @@ class _PostTileState extends State<PostTile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Divider(),
+            Divider(
+              thickness: 2,
+            ),
             Text(widget.title, style: TextStyle(fontSize: 16)),
             SizedBox(height: 8),
             Center(

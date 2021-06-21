@@ -53,8 +53,12 @@
 
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
-import 'package:umrahhaji/pages/soal_jawab/qna_umrah_haji/list_qna_umrah_haji.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:umrahhaji/pages/home/wp-article-homepage.dart';
+import 'package:umrahhaji/pages/soal_jawab/qna_option/qna_option.dart';
 import 'package:umrahhaji/widget/navigation_drawer_widget.dart';
+
+import 'details_article_homepage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -215,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => QnAUmrahHaji()),
+                        MaterialPageRoute(builder: (context) => QnAOption()),
                       );
                       // Respond to button press
                     },
@@ -237,7 +241,7 @@ class _HomePageState extends State<HomePage> {
               height: 10.0,
             ),
             Text(
-              'Umrah Haji Artikel',
+              'Nota Umrah Haji dan lain-lain',
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w800,
@@ -247,29 +251,127 @@ class _HomePageState extends State<HomePage> {
               height: 10.0,
             ),
 
-            // Container(
-            //   height: 200.0,
-            //   child: FutureBuilder(
-            //     future: fetchWpPosts(),
-            //     // ignore: missing_return
-            //     builder: (context, snapshot) {
-            //       if (snapshot.hasData) {
-            //         return ListView.builder(
-            //             scrollDirection: Axis.vertical,
-            //             shrinkWrap: true,
-            //             itemCount: snapshot.data.length,
-            //             itemBuilder: (BuildContext context, int index) {
-            //               Map wppost = snapshot.data[index];
-            //               return Text(wppost['title']['rendered']);
-            //             });
-            //       } else {}
-            //     },
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 20.0,
-            // ),
+            //article
+            SingleChildScrollView(
+              child: Container(
+                child: FutureBuilder(
+                  future: fetchWpPosts(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          Map wppost = snapshot.data[index];
+
+                          return PostTile(
+                            href: wppost["_links"]["wp:featuredmedia"][0]
+                                ["href"],
+                            title: wppost["title"]["rendered"]
+                                .replaceAll("&#038;", "")
+                                .replaceAll("&#8217;", "'"),
+                            desc: wppost["excerpt"]["rendered"],
+                            content: wppost["content"]["rendered"],
+                          );
+                        },
+                      );
+                    }
+                    return CircularProgressIndicator();
+                  },
+                ),
+              ),
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+//article
+class PostTile extends StatefulWidget {
+  final String href, title, desc, content;
+  PostTile({this.href, this.title, this.desc, this.content});
+
+  @override
+  _PostTileState createState() => _PostTileState();
+}
+
+class _PostTileState extends State<PostTile> {
+  var imageUrl = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DetailsHomePageArticle(
+                        imageUrl: imageUrl,
+                        title: widget.title,
+                        desc: widget.content,
+                      )));
+        },
+        child: SingleChildScrollView(
+          child: Container(
+            child: Row(
+              children: [
+                Divider(
+                  thickness: 1.0,
+                ),
+                Container(
+                  width: 120,
+                  height: 75,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: FutureBuilder(
+                        future: fetchWpPostImageUrl(widget.href),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            imageUrl = snapshot.data["media_details"]["sizes"]
+                                ["thumbnail"]["source_url"];
+                            return Image.network(snapshot.data["media_details"]
+                                ["sizes"]["thumbnail"]["source_url"]);
+                          }
+
+                          return Center(child: CircularProgressIndicator());
+                        }),
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.title,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        // Html(
+                        //   data: widget.desc,
+                        // ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
