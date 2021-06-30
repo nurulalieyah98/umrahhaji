@@ -77,20 +77,25 @@ class _PostTileState extends State<PostTile> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FutureBuilder(
-                    future: fetchWpPostImageUrl(widget.href),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        imageUrl = snapshot.data["media_details"]["sizes"]
-                            ["thumbnail"]["source_url"];
-                        return Image.network(snapshot.data["media_details"]
-                            ["sizes"]["thumbnail"]["source_url"]);
-                      }
-
-                      return Center(child: CircularProgressIndicator());
-                    }),
-                SizedBox(height: 8),
+                Divider(
+                  thickness: 5,
+                ),
                 Text(widget.title, style: TextStyle(fontSize: 16)),
+                SizedBox(height: 8),
+                Center(
+                  child: FutureBuilder(
+                      future: fetchWpPostImageUrl(widget.href),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          imageUrl = snapshot.data["media_details"]["sizes"]
+                              ["thumbnail"]["source_url"];
+                          return Image.network(snapshot.data["media_details"]
+                              ["sizes"]["thumbnail"]["source_url"]);
+                        }
+
+                        return Center(child: CircularProgressIndicator());
+                      }),
+                ),
                 SizedBox(height: 5),
                 Html(
                   data: widget.desc,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
+import 'package:umrahhaji/pages/product/list_product.dart';
 import 'package:umrahhaji/pages/product/product.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_haji/list_qna_haji.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_option/qna_option.dart';
@@ -242,7 +243,7 @@ class NavigationDrawer extends StatelessWidget {
             //testing je
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => QnAOption()),
+              MaterialPageRoute(builder: (context) => ListProduct()),
             );
           },
           leading: Icon(

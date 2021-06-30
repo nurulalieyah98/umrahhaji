@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:umrahhaji/pages/soal_jawab/qna_qurban/details_qna_qurban.dart';
-import 'package:umrahhaji/pages/soal_jawab/qna_qurban/wp_api_qna_qurban.dart';
+import 'package:umrahhaji/pages/product/details_product.dart';
+import 'package:umrahhaji/pages/product/wp_api_product.dart';
 
-class QnAQurban extends StatefulWidget {
+class ListProduct extends StatefulWidget {
   @override
-  _QnAQurbanState createState() => _QnAQurbanState();
+  _ListProductState createState() => _ListProductState();
 }
 
-class _QnAQurbanState extends State<QnAQurban> {
+class _ListProductState extends State<ListProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("QnA Qurban"),
+        title: Text("QnA Haji"),
       ),
       body: Container(
         child: FutureBuilder(
@@ -27,7 +27,10 @@ class _QnAQurbanState extends State<QnAQurban> {
 
                   return PostTile(
                     href: wppost["_links"]["wp:featuredmedia"][0]["href"],
-                    title: wppost["title"]["rendered"].replaceAll("#038;", ""),
+                    title: wppost["title"]["rendered"]
+                        .replaceAll("&#038;", "")
+                        .replaceAll("&#8216;", "")
+                        .replaceAll("&#8217;", "'"),
                     desc: wppost["excerpt"]["rendered"],
                     content: wppost["content"]["rendered"],
                   );
@@ -60,7 +63,7 @@ class _PostTileState extends State<PostTile> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => DetailsQnAQurban(
+                  builder: (context) => DetailsProduct(
                         imageUrl: imageUrl,
                         title: widget.title,
                         desc: widget.content,

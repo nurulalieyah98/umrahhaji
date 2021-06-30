@@ -3,7 +3,7 @@ import 'dart:convert';
 
 Future<List> fetchWpPosts() async {
   var url = Uri.parse(
-      "https://umrahhaji.com/index.php/wp-json/wp/v2/posts?per_page=4&order=desc&orderby=date&status=publish");
+      "https://umrahhaji.com/index.php/wp-json/wp/v2/product?per_page=4&orderby=date&status=publish");
 
   final response = await http.get(
     url,

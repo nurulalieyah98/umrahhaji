@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CardBook extends StatelessWidget {
-  CardBook({this.url, this.onTap, this.title, this.author, this.synopsis});
+class CardProduct extends StatelessWidget {
+  CardProduct({this.url, this.onTap, this.title, this.author, this.synopsis});
 
   final String url;
   final Function onTap;
