@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:umrahhaji/pages/contact_us/contactus.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
+import 'package:umrahhaji/pages/modul%20ebook/ebook3.dart';
 import 'package:umrahhaji/pages/product/list_product.dart';
 import 'package:umrahhaji/pages/product/product.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_haji/list_qna_haji.dart';
-import 'package:umrahhaji/pages/soal_jawab/qna_option/qna_option.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_qurban/list_qna_qurban.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_ramadhan/no_post.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_umrah/list_qna_umrah.dart';
-import 'package:umrahhaji/pages/soal_jawab/qna_umrah/testing.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_umrah_haji/list_qna_umrah_haji.dart';
 import 'package:umrahhaji/pages/umrahhaji_tv/list_screen.dart';
-import 'package:umrahhaji/pages/modul%20ebook/ebook2.dart';
 import 'package:umrahhaji/widget/drawer_header.dart';
 
 class NavigationDrawer extends StatelessWidget {
@@ -215,7 +214,7 @@ class NavigationDrawer extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Ebook()),
+              MaterialPageRoute(builder: (context) => Ebook3()),
             );
           },
           leading: Icon(

@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class Ebook extends StatefulWidget {
-  Ebook({Key key, this.title}) : super(key: key);
+class Ebook2 extends StatefulWidget {
+  Ebook2({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _EbookState createState() => _EbookState();
+  _Ebook2State createState() => _Ebook2State();
 }
 
-class _EbookState extends State<Ebook> {
+class _Ebook2State extends State<Ebook2> {
   int progress = 0;
 
   ReceivePort _receivePort = ReceivePort();

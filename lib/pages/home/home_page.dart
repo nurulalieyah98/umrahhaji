@@ -7,6 +7,7 @@ import 'package:umrahhaji/pages/home/product_homepage/wp-product-homepage.dart';
 import 'package:umrahhaji/pages/product/product.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_option/qna_option.dart';
 import 'package:umrahhaji/widget/navigation_drawer_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 20.0,
             ),
-            //untuk image slider
+            ///////////////////////////////////////// image slider /////////////////////////////////////////////
             Center(
               child: Container(
                 child: Padding(
@@ -318,7 +319,7 @@ class _HomePageState extends State<HomePage> {
                     "Kami juga menyediakan khidmat menjual barangan keperluan haji dan umrah.",
                     textAlign: TextAlign.center,
                     style: new TextStyle(
-                      fontSize: 12.0,
+                      fontSize: 15.0,
                       fontStyle: FontStyle.italic,
                       fontFamily: 'Roboto',
                       color: Colors.black,
@@ -356,6 +357,7 @@ class _HomePageState extends State<HomePage> {
                                   .replaceAll("&#8217;", "'"),
                               desc: wppost["excerpt"]["rendered"],
                               content: wppost["content"]["rendered"],
+                              link: wppost["link"],
                             );
                           },
                         );
@@ -389,31 +391,175 @@ class _HomePageState extends State<HomePage> {
               height: 20.0,
             ),
             //////////////////////////////////////////////////////// footer //////////////////////////////////////////////////
-            Image(
-              image: AssetImage('assets/images/UH1.png'),
-              width: 200.0,
-              // height: 200.0,
-              alignment: Alignment.center,
-            ),
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
+            Container(
+              child: Column(
                 children: [
-                  TextSpan(
-                    text:
-                        'Platfrom inisiatif untuk membantu para bakal jemaah haji dan umrah yang dibangunkan oleh Akram Afifi Holdings Sdn Bhd.',
-                    style: TextStyle(color: Colors.black),
+                  SizedBox(
+                    height: 10.0,
                   ),
-                  TextSpan(
-                    text: 'Ikuti kami di media sosial yang tertera di bawah.',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                  Image(
+                    image: AssetImage('assets/images/UH1.png'),
+                    width: 200.0,
+                    // height: 200.0,
+                    alignment: Alignment.center,
+                  ),
+                  Text(
+                    'Platfrom inisiatif untuk membantu para bakal jemaah haji dan umrah yang dibangunkan oleh Akram Afifi Holdings Sdn Bhd.',
+                    style: new TextStyle(
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.normal,
+                      fontFamily: 'Roboto',
                       color: Colors.black,
                     ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    "Ikuti kami di media sosial yang tertera di bawah.",
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                      fontSize: 13.0,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Roboto',
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () => launch(
+                            'https://www.instagram.com/umrahhajiofficial/'),
+                        child: Image(
+                          image: AssetImage('assets/images/instagram.png'),
+                          width: 50.0,
+                          height: 50.0,
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () => launch(
+                            'https://www.youtube.com/channel/UCxjk8D7kVP7nIyhkadPl-zA'),
+                        child: Image(
+                          image: AssetImage('assets/images/youtube.png'),
+                          width: 50.0,
+                          height: 50.0,
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () => launch(
+                            'https://www.facebook.com/umrahhajiofficial/'),
+                        child: Image(
+                          image: AssetImage('assets/images/facebook.png'),
+                          width: 50.0,
+                          height: 50.0,
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () => launch('https://t.me/NotaUmrahHaji'),
+                        child: Image(
+                          image: AssetImage('assets/images/telegram.png'),
+                          width: 50.0,
+                          height: 50.0,
+                          alignment: Alignment.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.0,
                   ),
                 ],
               ),
             ),
+
+            // Container(
+            //   child: Column(
+            //     children: [
+            //       RichText(
+            //         textAlign: TextAlign.center,
+            //         text: TextSpan(
+            //           children: [
+            //             TextSpan(
+            //               text:
+            //                   'Platfrom inisiatif untuk membantu para bakal jemaah haji dan umrah yang dibangunkan oleh Akram Afifi Holdings Sdn Bhd.',
+            //               style: TextStyle(color: Colors.black),
+            //             ),
+            //             TextSpan(
+            //               text:
+            //                   'Ikuti kami di media sosial yang tertera di bawah.',
+            //               style: TextStyle(
+            //                 fontWeight: FontWeight.bold,
+            //                 color: Colors.black,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //       SizedBox(
+            //         height: 20.0,
+            //       ),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           GestureDetector(
+            //             onTap: () => launch(
+            //                 'https://www.instagram.com/umrahhajiofficial/'),
+            //             child: Image(
+            //               image: AssetImage('assets/images/instagram.png'),
+            //               width: 50.0,
+            //               height: 50.0,
+            //               alignment: Alignment.center,
+            //             ),
+            //           ),
+            //           SizedBox(width: 10),
+            //           GestureDetector(
+            //             onTap: () => launch(
+            //                 'https://www.youtube.com/channel/UCxjk8D7kVP7nIyhkadPl-zA'),
+            //             child: Image(
+            //               image: AssetImage('assets/images/youtube.png'),
+            //               width: 50.0,
+            //               height: 50.0,
+            //               alignment: Alignment.center,
+            //             ),
+            //           ),
+            //           SizedBox(width: 10),
+            //           GestureDetector(
+            //             onTap: () => launch(
+            //                 'https://www.facebook.com/umrahhajiofficial/'),
+            //             child: Image(
+            //               image: AssetImage('assets/images/facebook.png'),
+            //               width: 50.0,
+            //               height: 50.0,
+            //               alignment: Alignment.center,
+            //             ),
+            //           ),
+            //           SizedBox(width: 10),
+            //           GestureDetector(
+            //             onTap: () => launch('https://t.me/NotaUmrahHaji'),
+            //             child: Image(
+            //               image: AssetImage('assets/images/telegram.png'),
+            //               width: 50.0,
+            //               height: 50.0,
+            //               alignment: Alignment.center,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
             SizedBox(
               height: 20.0,
             ),

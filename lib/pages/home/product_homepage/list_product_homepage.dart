@@ -4,8 +4,8 @@ import 'package:umrahhaji/pages/home/product_homepage/wp-product-homepage.dart';
 
 //product
 class PostTileProduct extends StatefulWidget {
-  final String href, title, desc, content;
-  PostTileProduct({this.href, this.title, this.desc, this.content});
+  final String href, title, desc, content, link;
+  PostTileProduct({this.href, this.title, this.desc, this.content, this.link});
 
   @override
   _PostTileProductState createState() => _PostTileProductState();
@@ -35,6 +35,7 @@ class _PostTileProductState extends State<PostTileProduct> {
                               imageUrl: imageUrl,
                               title: widget.title,
                               desc: widget.content,
+                              link: widget.link,
                             )));
               },
               child: Column(
