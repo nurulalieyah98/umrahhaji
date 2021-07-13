@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:umrahhaji/pages/contact_us/contactus.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
 import 'package:umrahhaji/pages/modul%20ebook/ebook3.dart';
-import 'package:umrahhaji/pages/product/list_product.dart';
+import 'package:umrahhaji/pages/modul%20ebook/screen_ebook.dart';
 import 'package:umrahhaji/pages/product/product.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_haji/list_qna_haji.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_qurban/list_qna_qurban.dart';
@@ -242,7 +242,7 @@ class NavigationDrawer extends StatelessWidget {
             //testing je
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ListProduct()),
+              MaterialPageRoute(builder: (context) => ScreenEbook()),
             );
           },
           leading: Icon(

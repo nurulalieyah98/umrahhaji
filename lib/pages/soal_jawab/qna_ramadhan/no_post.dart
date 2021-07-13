@@ -4,18 +4,20 @@ import 'package:flutter/material.dart';
 class NoPostQnARamadhan extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text('Qna Ramadhan'),
-          centerTitle: true,
+        appBar: new AppBar(
+          title: new Text("Qna Ramadhan"),
+          automaticallyImplyLeading: false, //to remove back button
         ),
-        body: Text(
-          "No Posts Found.",
-          textAlign: TextAlign.center,
-          style: new TextStyle(
-            fontSize: 15.0,
-            fontStyle: FontStyle.italic,
-            fontFamily: 'Roboto',
-            color: Colors.black,
+        body: Center(
+          child: Text(
+            "No Posts Found.",
+            textAlign: TextAlign.center,
+            style: new TextStyle(
+              fontSize: 15.0,
+              fontStyle: FontStyle.italic,
+              fontFamily: 'Roboto',
+              color: Colors.black,
+            ),
           ),
         ),
       );

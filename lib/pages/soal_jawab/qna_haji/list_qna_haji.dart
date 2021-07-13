@@ -12,8 +12,9 @@ class _QnAHajiState extends State<QnAHaji> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("QnA Haji"),
+      appBar: new AppBar(
+        title: new Text("Qna Haji"),
+        automaticallyImplyLeading: false, //to remove back button
       ),
       body: Container(
         child: FutureBuilder(

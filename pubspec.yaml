@@ -36,6 +36,8 @@ dependencies:
   flutter_spinkit: ^5.0.0
   carousel_pro: ^1.0.0
   http:
+  bubble_bottom_bar: ^1.2.0
+  get: ^4.1.4
 
   #download ebook
   path_provider:
@@ -43,6 +45,7 @@ dependencies:
   dio:
   flutter_downloader: ^1.6.0
   permission_handler: ^7.1.0
+  google_fonts: ^2.0.0
 
   #soaljawab
   flutter_html: ^2.0.0

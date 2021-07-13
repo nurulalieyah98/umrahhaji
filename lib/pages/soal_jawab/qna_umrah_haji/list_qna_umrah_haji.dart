@@ -12,8 +12,9 @@ class _QnAUmrahHajiState extends State<QnAUmrahHaji> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("QnA Umrah Haji"),
+      appBar: new AppBar(
+        title: new Text("Qna Umrah Haji"),
+        automaticallyImplyLeading: false, //to remove back button
       ),
       body: Container(
         child: FutureBuilder(

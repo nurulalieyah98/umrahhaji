@@ -12,8 +12,9 @@ class _QnAQurbanState extends State<QnAQurban> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("QnA Qurban"),
+     appBar: new AppBar(
+        title: new Text("Qna Qurban"),
+        automaticallyImplyLeading: false, //to remove back button
       ),
       body: Container(
         child: FutureBuilder(

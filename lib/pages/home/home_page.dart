@@ -1,12 +1,15 @@
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:umrahhaji/pages/home/article_homepage/list_article_homepage.dart';
 import 'package:umrahhaji/pages/home/article_homepage/wp-article-homepage.dart';
 import 'package:umrahhaji/pages/home/product_homepage/list_product_homepage.dart';
 import 'package:umrahhaji/pages/home/product_homepage/wp-product-homepage.dart';
+import 'package:umrahhaji/pages/modul%20ebook/screen_ebook.dart';
 import 'package:umrahhaji/pages/product/product.dart';
+import 'package:umrahhaji/pages/soal_jawab/post_home.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_option/qna_option.dart';
-import 'package:umrahhaji/widget/navigation_drawer_widget.dart';
+import 'package:umrahhaji/pages/umrahhaji_tv/list_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,16 +18,106 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void changePage(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
+  int currentIndex = 0;
+
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Laman Utama"),
       ),
+      bottomNavigationBar: BubbleBottomBar(
+          opacity: 0.2,
+          backgroundColor: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(3.0)),
+          currentIndex: currentIndex,
+          hasInk: true,
+          inkColor: Colors.black12,
+          hasNotch: true,
+          //fabLocation: BubbleBottomBarFabLocation.center,
+          onTap: changePage,
+          items: <BubbleBottomBarItem>[
+            BubbleBottomBarItem(
+              backgroundColor: Colors.black,
+              icon: Icon(Icons.home, color: Colors.black),
+              activeIcon: Icon(Icons.home, color: Colors.black),
+              title: GestureDetector(
+                  child: Text("Home"),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  }), //Route to HomePage
+            ),
+            BubbleBottomBarItem(
+              backgroundColor: Colors.black,
+              icon: Icon(Icons.article_rounded, color: Colors.black),
+              activeIcon: Icon(Icons.article_rounded, color: Colors.black),
+              title: GestureDetector(
+                  child: Text("Articles"),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => PostHome()));
+                  }), //Route to Articles
+            ),
+            BubbleBottomBarItem(
+              backgroundColor: Colors.black,
+              icon: Icon(Icons.live_tv_rounded, color: Colors.black),
+              activeIcon: Icon(Icons.live_tv_rounded, color: Colors.black),
+              title: GestureDetector(
+                  child: Text("TV"),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ListScreen()));
+                  }), //Route to UmrahHaji TV
+            ),
+            BubbleBottomBarItem(
+              backgroundColor: Colors.black,
+              icon: Icon(Icons.shopping_cart_rounded, color: Colors.black),
+              activeIcon:
+                  Icon(Icons.shopping_cart_rounded, color: Colors.black),
+              title: GestureDetector(
+                  child: Text("Shop"),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ProductPage()));
+                  }), //Route to Shop
+            ),
+            BubbleBottomBarItem(
+              backgroundColor: Colors.black,
+              icon: Icon(Icons.menu_book_rounded, color: Colors.black),
+              activeIcon: Icon(Icons.menu_book_rounded, color: Colors.black),
+              title: GestureDetector(
+                  child: Text("Ebook"),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ScreenEbook()));
+                  }), //Route to eBook
+            ),
+            BubbleBottomBarItem(
+              backgroundColor: Colors.black,
+              icon: Icon(Icons.account_circle_rounded, color: Colors.black),
+              activeIcon:
+                  Icon(Icons.account_circle_rounded, color: Colors.black),
+              title: GestureDetector(
+                  child: Text("Profile"),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  }), //Route to Profile
+            ),
+          ]),
       //Now we are going to open a new file
       // where we will create the layout of the Drawer
-      drawer: Drawer(
-        child: NavigationDrawer(),
-      ),
+      // drawer: Drawer(
+      //   child: NavigationDrawer(),
+      // ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -483,83 +576,6 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-
-            // Container(
-            //   child: Column(
-            //     children: [
-            //       RichText(
-            //         textAlign: TextAlign.center,
-            //         text: TextSpan(
-            //           children: [
-            //             TextSpan(
-            //               text:
-            //                   'Platfrom inisiatif untuk membantu para bakal jemaah haji dan umrah yang dibangunkan oleh Akram Afifi Holdings Sdn Bhd.',
-            //               style: TextStyle(color: Colors.black),
-            //             ),
-            //             TextSpan(
-            //               text:
-            //                   'Ikuti kami di media sosial yang tertera di bawah.',
-            //               style: TextStyle(
-            //                 fontWeight: FontWeight.bold,
-            //                 color: Colors.black,
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //       SizedBox(
-            //         height: 20.0,
-            //       ),
-            //       Row(
-            //         mainAxisAlignment: MainAxisAlignment.center,
-            //         children: [
-            //           GestureDetector(
-            //             onTap: () => launch(
-            //                 'https://www.instagram.com/umrahhajiofficial/'),
-            //             child: Image(
-            //               image: AssetImage('assets/images/instagram.png'),
-            //               width: 50.0,
-            //               height: 50.0,
-            //               alignment: Alignment.center,
-            //             ),
-            //           ),
-            //           SizedBox(width: 10),
-            //           GestureDetector(
-            //             onTap: () => launch(
-            //                 'https://www.youtube.com/channel/UCxjk8D7kVP7nIyhkadPl-zA'),
-            //             child: Image(
-            //               image: AssetImage('assets/images/youtube.png'),
-            //               width: 50.0,
-            //               height: 50.0,
-            //               alignment: Alignment.center,
-            //             ),
-            //           ),
-            //           SizedBox(width: 10),
-            //           GestureDetector(
-            //             onTap: () => launch(
-            //                 'https://www.facebook.com/umrahhajiofficial/'),
-            //             child: Image(
-            //               image: AssetImage('assets/images/facebook.png'),
-            //               width: 50.0,
-            //               height: 50.0,
-            //               alignment: Alignment.center,
-            //             ),
-            //           ),
-            //           SizedBox(width: 10),
-            //           GestureDetector(
-            //             onTap: () => launch('https://t.me/NotaUmrahHaji'),
-            //             child: Image(
-            //               image: AssetImage('assets/images/telegram.png'),
-            //               width: 50.0,
-            //               height: 50.0,
-            //               alignment: Alignment.center,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     ],
-            //   ),
-            // ),
             SizedBox(
               height: 20.0,
             ),
