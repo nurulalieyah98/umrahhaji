@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class NoPostQnARamadhan extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: new AppBar(
-          title: new Text("Qna Ramadhan"),
-          automaticallyImplyLeading: false, //to remove back button
-        ),
+        // appBar: new AppBar(
+        //   title: new Text("Qna Ramadhan"),
+        //   automaticallyImplyLeading: false, //to remove back button
+        // ),
         body: Center(
           child: Text(
             "No Posts Found.",

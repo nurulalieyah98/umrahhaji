@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_qurban/details_qna_qurban.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_qurban/wp_api_qna_qurban.dart';
 
@@ -12,11 +11,12 @@ class _QnAQurbanState extends State<QnAQurban> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: new AppBar(
-        title: new Text("Qna Qurban"),
-        automaticallyImplyLeading: false, //to remove back button
-      ),
+      // appBar: new AppBar(
+      //   title: new Text("Qna Qurban"),
+      //   automaticallyImplyLeading: false, //to remove back button
+      // ),
       body: Container(
+        padding: const EdgeInsets.all(10.0).copyWith(bottom: 0),
         child: FutureBuilder(
           future: fetchWpPosts(),
           builder: (context, snapshot) {
@@ -67,37 +67,50 @@ class _PostTileState extends State<PostTile> {
                         desc: widget.content,
                       )));
         },
-        child: Container(
-            margin: EdgeInsets.only(top: 8),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Divider(
-                  thickness: 5,
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(height: 8),
+                  Container(
+                    height: 100,
+                    width: 100,
+                    child: FutureBuilder(
+                        future: fetchWpPostImageUrl(widget.href),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            imageUrl = snapshot.data["media_details"]["sizes"]
+                                ["woocommerce_thumbnail"]["source_url"];
+                            return Image.network(
+                                snapshot.data["media_details"]["sizes"]
+                                    ["woocommerce_thumbnail"]["source_url"],
+                                fit: BoxFit.cover);
+                          }
+                          return Center(child: CircularProgressIndicator());
+                        }),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0).copyWith(bottom: 0),
+                  child: Text(
+                    widget.title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 12),
+                  ),
                 ),
-                Text(widget.title, style: TextStyle(fontSize: 16)),
-                SizedBox(height: 8),
-                Center(
-                  child: FutureBuilder(
-                      future: fetchWpPostImageUrl(widget.href),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          imageUrl = snapshot.data["media_details"]["sizes"]
-                              ["thumbnail"]["source_url"];
-                          return Image.network(snapshot.data["media_details"]
-                              ["sizes"]["thumbnail"]["source_url"]);
-                        }
-
-                        return Center(child: CircularProgressIndicator());
-                      }),
-                ),
-                SizedBox(height: 5),
-                Html(
-                  data: widget.desc,
-                  // style: TextStyle(fontSize: 12)
-                )
-              ],
-            )));
+              ),
+              SizedBox(height: 8),
+            ],
+          ),
+        ));
   }
 }

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_home.dart';
 
 class PostHome extends StatelessWidget {
-  // const PostHome({ Key? key }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

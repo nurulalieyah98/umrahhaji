@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_umrah_haji/testing_design_details.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_umrah_haji/wp_api_qna_umrah_haji.dart';
 
-class QnAUmrahHaji extends StatefulWidget {
+class TestingDesignList extends StatefulWidget {
   @override
-  _QnAUmrahHajiState createState() => _QnAUmrahHajiState();
+  _TestingDesignListState createState() => _TestingDesignListState();
 }
 
-class _QnAUmrahHajiState extends State<QnAUmrahHaji> {
+class _TestingDesignListState extends State<TestingDesignList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +118,6 @@ class _PostTileState extends State<PostTile> {
     );
   }
 }
-
 
 
 // import 'package:flutter/material.dart';

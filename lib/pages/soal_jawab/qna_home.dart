@@ -4,7 +4,7 @@ import 'package:umrahhaji/pages/soal_jawab/qna_haji/list_qna_haji.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_qurban/list_qna_qurban.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_ramadhan/no_post.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_umrah/list_qna_umrah.dart';
-import 'package:umrahhaji/pages/soal_jawab/qna_umrah_haji/testing.dart';
+import 'package:umrahhaji/pages/soal_jawab/qna_umrah_haji/list_qna_umrah_haji.dart';
 
 // ignore: must_be_immutable
 class ArticleHome extends StatefulWidget {
@@ -98,7 +98,7 @@ class _ArticleHomeState extends State<ArticleHome>
                 ),
                 Tab(
                   icon: Icon(
-                    FontAwesomeIcons.paw,
+                    FontAwesomeIcons.mosque,
                     color: _tabController.index == 3
                         ? Color(widget.colorVal)
                         : Colors.grey,
