@@ -306,35 +306,174 @@ class _BodyEbookState extends State<BodyEbook> {
 
   @override
   Widget build(BuildContext context) {
+    // return SingleChildScrollView(
+    //   child: Container(
+    //     height: MediaQuery.of(context).size.height,
+    //     width: MediaQuery.of(context).size.width,
+    //     child: Column(
+    //       children: <Widget>[
+    //         SizedBox(height: 30),
+    //         Image(
+    //           image: AssetImage('assets/images/ebook.jpeg'),
+    //           width: 400.0,
+    //           height: 260.0,
+    //           alignment: Alignment.center,
+    //         ),
+    //         SizedBox(height: 30),
+    //         SingleChildScrollView(
+    //           child: Container(
+    //             padding: EdgeInsets.only(
+    //               top: 30.0,
+    //               left: 20.0,
+    //               right: 20.0,
+    //             ),
+    //             decoration: BoxDecoration(
+    //               color: Colors.white,
+    //               borderRadius: BorderRadius.only(
+    //                 topLeft: Radius.circular(24),
+    //                 topRight: Radius.circular(24),
+    //               ),
+    //             ),
+    //             child: Column(
+    //               children: <Widget>[
+    //                 Text(
+    //                     "Dapatkan ebook panduan umrah bernilai RM59 secara PERCUMA.",
+    //                     textAlign: TextAlign.center,
+    //                     style: GoogleFonts.fredokaOne(
+    //                         textStyle: TextStyle(
+    //                       fontSize: 15.0,
+    //                       color: Colors.black,
+    //                     ))),
+    //                 SizedBox(height: 30),
+    //                 Text(
+    //                   "Semoga dengan panduan ini akan membantu para jemaah dapat menunaikan umrah dan haji dengan lebih sempurna.",
+    //                   textAlign: TextAlign.center,
+    //                   style: GoogleFonts.patrickHand(
+    //                     textStyle: TextStyle(
+    //                       fontSize: 16.0,
+    //                       fontStyle: FontStyle.italic,
+    //                       color: Colors.black,
+    //                     ),
+    //                   ),
+    //                 ),
+    //                 SizedBox(height: 30),
+    //                 Text(
+    //                   '$progress%',
+    //                   style: GoogleFonts.fredokaOne(
+    //                     textStyle: TextStyle(
+    //                       fontSize: 15.0,
+    //                       fontStyle: FontStyle.italic,
+    //                       color: Colors.black,
+    //                     ),
+    //                   ),
+    //                 ),
+    //                 SizedBox(height: 30),
+    //                 ElevatedButton(
+    //                     child: Text('Download E-Book'),
+    //                     onPressed: () async {
+    //                       downloadFile(uri, filename);
+    //                     }),
+    //                 SizedBox(height: 30),
+    //                 // isDownloaded
+    //                 //     ? Text(
+    //                 //         'File Downloaded! You can see your file in the download file',
+    //                 //         textAlign: TextAlign.center,
+    //                 //         style: GoogleFonts.zcoolQingKeHuangYou(
+    //                 //           textStyle: TextStyle(
+    //                 //             fontSize: 15.0,
+    //                 //             fontStyle: FontStyle.italic,
+    //                 //             color: Colors.black,
+    //                 //           ),
+    //                 //         ),
+    //                 //       )
+    //                 //     : Text(
+    //                 //         'Press the Button to start Downloading!',
+    //                 //         textAlign: TextAlign.center,
+    //                 //         style: GoogleFonts.zcoolQingKeHuangYou(
+    //                 //           textStyle: TextStyle(
+    //                 //             fontSize: 15.0,
+    //                 //             fontStyle: FontStyle.italic,
+    //                 //             color: Colors.black,
+    //                 //           ),
+    //                 //         ),
+    //                 //       ),
+    //                 // SizedBox(
+    //                 //   height: 40.0,
+    //                 // ),
+    //                 RichText(
+    //                   textAlign: TextAlign.center,
+    //                   text: TextSpan(
+    //                     children: [
+    //                       TextSpan(
+    //                         text: 'Gagal Muat Turun ? ',
+    //                         style: TextStyle(
+    //                           color: Colors.black,
+    //                           fontWeight: FontWeight.bold,
+    //                         ),
+    //                       ),
+    //                       TextSpan(
+    //                           text: 'Tekan Disini',
+    //                           style: TextStyle(
+    //                             fontWeight: FontWeight.bold,
+    //                             color: Colors.red,
+    //                           ),
+    //                           recognizer: TapGestureRecognizer()
+    //                             ..onTap = () {
+    //                               launch(
+    //                                   'https://umrahhaji.com/wp-content/uploads/2021/06/EBOOK-INFOGRAFIK-UMRAH-2021.pdf');
+    //                             }),
+    //                     ],
+    //                   ),
+    //                 ),
+    //                 SizedBox(height: 30),
+    //               ],
+    //             ),
+    //           ),
+    //         )
+    //       ],
+    //     ),
+    //   ),
+    // );
+
+    var size = MediaQuery.of(context).size;
+
     return SingleChildScrollView(
-      child: Column(
+      child: Stack(
         children: <Widget>[
-          SizedBox(height: 30),
-          Image(
-            image: AssetImage('assets/images/ebook.jpeg'),
-            width: 400.0,
-            height: 260.0,
-            alignment: Alignment.center,
+          Container(
+            width: double.infinity,
+            height: size.height * 0.5,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/ebook.jpeg'),
+                  fit: BoxFit.cover),
+            ),
           ),
-          SizedBox(height: 30),
-          SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                top: 30.0,
-                left: 20.0,
-                right: 20.0,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24),
-                  topRight: Radius.circular(24),
-                ),
-              ),
+          Container(
+            margin: EdgeInsets.only(top: size.height * 0.45),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(40),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(30),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  Align(
+                    child: Container(
+                      width: 150,
+                      height: 7,
+                      decoration: BoxDecoration(
+                        color: Colors.teal[50],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30),
                   Text(
-                      "Ebook Panduan Umrah dengan infografik berwarna yang bernilai RM59 secara PERCUMA sahaja. 😍",
+                      "Dapatkan ebook panduan umrah bernilai RM59 secara PERCUMA.",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.fredokaOne(
                           textStyle: TextStyle(
@@ -371,32 +510,32 @@ class _BodyEbookState extends State<BodyEbook> {
                         downloadFile(uri, filename);
                       }),
                   SizedBox(height: 30),
-                  isDownloaded
-                      ? Text(
-                          'File Downloaded! You can see your file in the download file',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.zcoolQingKeHuangYou(
-                            textStyle: TextStyle(
-                              fontSize: 15.0,
-                              fontStyle: FontStyle.italic,
-                              color: Colors.black,
-                            ),
-                          ),
-                        )
-                      : Text(
-                          'Press the Button to start Downloading!',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.zcoolQingKeHuangYou(
-                            textStyle: TextStyle(
-                              fontSize: 15.0,
-                              fontStyle: FontStyle.italic,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                  SizedBox(
-                    height: 40.0,
-                  ),
+                  // isDownloaded
+                  //     ? Text(
+                  //         'File Downloaded! You can see your file in the download file',
+                  //         textAlign: TextAlign.center,
+                  //         style: GoogleFonts.zcoolQingKeHuangYou(
+                  //           textStyle: TextStyle(
+                  //             fontSize: 15.0,
+                  //             fontStyle: FontStyle.italic,
+                  //             color: Colors.black,
+                  //           ),
+                  //         ),
+                  //       )
+                  //     : Text(
+                  //         'Press the Button to start Downloading!',
+                  //         textAlign: TextAlign.center,
+                  //         style: GoogleFonts.zcoolQingKeHuangYou(
+                  //           textStyle: TextStyle(
+                  //             fontSize: 15.0,
+                  //             fontStyle: FontStyle.italic,
+                  //             color: Colors.black,
+                  //           ),
+                  //         ),
+                  //       ),
+                  // SizedBox(
+                  //   height: 40.0,
+                  // ),
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
@@ -426,7 +565,7 @@ class _BodyEbookState extends State<BodyEbook> {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -38,6 +38,8 @@ dependencies:
   http:
   bubble_bottom_bar: ^1.2.0
   get: ^4.1.4
+  line_awesome_flutter: ^1.0.1
+
 
   #download ebook
   path_provider:

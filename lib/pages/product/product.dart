@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:umrahhaji/pages/home/home_page.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ProductPage extends StatelessWidget {
@@ -23,6 +24,10 @@ class ProductPage extends StatelessWidget {
                 title: Text('Kelengkapan Umrah Haji'),
                 centerTitle: true,
                 backgroundColor: Colors.teal,
+                leading: BackButton(
+                    color: Colors.white,
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()))),
               ),
               body: Container(
                 child: SafeArea(

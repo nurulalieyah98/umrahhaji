@@ -1,70 +1,60 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:umrahhaji/otp/screen/register_screen.dart';
-import 'package:umrahhaji/otp/screen/user_profile.dart';
+import 'package:umrahhaji/otp/screen/user_profile2.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-class LoginScreen extends StatefulWidget {
-  LoginScreen({Key key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  RegisterScreen({Key key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _formKeyOTP = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final TextEditingController numberController = new TextEditingController();
+  final TextEditingController nameController = new TextEditingController();
+  final TextEditingController cellnumberController =
+      new TextEditingController();
   final TextEditingController otpController = new TextEditingController();
 
-  var isLoading = false; //loading
-  var isResend = false; //check otp either resending or not
-  var isLoginScreen = true;
+  var isLoading = false;
+  var isResend = false;
+  var isRegister = true;
   var isOTPScreen = false;
   var verificationCode = '';
 
   //Form controllers
   @override
   void initState() {
-    //if already sign in
-    if (_auth.currentUser != null) {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          // builder: (BuildContext context) => LoggedInScreen(),
-          builder: (BuildContext context) => UserProfile(),
-        ),
-        (route) => false,
-      );
-    }
     super.initState();
   }
 
   @override
   void dispose() {
     // Clean up the controller when the Widget is disposed
-    numberController.dispose();
+    nameController.dispose();
+    cellnumberController.dispose();
     otpController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return isOTPScreen ? returnOTPScreen() : returnLoginScreen();
+    return isOTPScreen ? returnOTPScreen() : registerScreen();
   }
 
-  Widget returnLoginScreen() {
+  Widget registerScreen() {
+    final node = FocusScope.of(context);
     return Scaffold(
         key: _scaffoldKey,
         appBar: new AppBar(
-          title: Text('Login with SMS'),
+          title: Text('Register new user'),
         ),
         body: ListView(children: [
           new Column(
@@ -86,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               image: new DecorationImage(
                                   fit: BoxFit.fill,
                                   image: new AssetImage(
-                                      'assets/images/login.jpg')))),
+                                      'assets/images/signup.jpg')))),
                       SizedBox(height: 30.0),
                       Container(
                           child: Padding(
@@ -94,8 +84,31 @@ class _LoginScreenState extends State<LoginScreen> {
                             vertical: 10.0, horizontal: 10.0),
                         child: TextFormField(
                           enabled: !isLoading,
-                          controller: numberController,
+                          controller: nameController,
+                          textInputAction: TextInputAction.next,
+                          onEditingComplete: () => node.nextFocus(),
+                          decoration: InputDecoration(
+                              labelText: 'Name',
+                              border: OutlineInputBorder(),
+                              suffixIcon: Icon(Icons.person)),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please enter a name';
+                            }
+                            return null;
+                          },
+                        ),
+                      )),
+                      Container(
+                          child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10.0),
+                        child: TextFormField(
+                          enabled: !isLoading,
                           keyboardType: TextInputType.phone,
+                          controller: cellnumberController,
+                          textInputAction: TextInputAction.done,
+                          onFieldSubmitted: (_) => node.unfocus(),
                           decoration: InputDecoration(
                               labelText: 'Phone Number',
                               hintText: 'Eg : 0123456789',
@@ -103,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               suffixIcon: Icon(Icons.phone_rounded)),
                           validator: (value) {
                             if (value.isEmpty) {
-                              return 'Please enter phone number';
+                              return 'Please enter a phone number';
                             }
                             return null;
                           },
@@ -115,68 +128,37 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: !isLoading
-                                  ? new ElevatedButton(
-                                      onPressed: () async {
-                                        if (!isLoading) {
-                                          if (_formKey.currentState
-                                              .validate()) {
-                                            displaySnackBar('Please wait...');
-                                            await login();
-                                          }
-                                        }
-                                      },
-                                      child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 15.0,
-                                            horizontal: 15.0,
-                                          ),
-                                          child: new Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Expanded(
-                                                  child: Text(
-                                                "Sign In",
-                                                textAlign: TextAlign.center,
-                                              )),
-                                            ],
-                                          )),
-                                    )
-                                  : CircularProgressIndicator(
-                                      backgroundColor:
-                                          Theme.of(context).primaryColor,
-                                    ))),
-                      Container(
-                          margin: EdgeInsets.only(top: 15, bottom: 5),
-                          alignment: AlignmentDirectional.center,
-                          child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10.0),
-                                      child: Text(
-                                        "No Account ?",
-                                      )),
-                                  InkWell(
-                                    child: Text(
-                                      'Sign up',
-                                    ),
-                                    onTap: () => {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  RegisterScreen()))
-                                    },
+                              child: new ElevatedButton(
+                                onPressed: () {
+                                  if (!isLoading) {
+                                    if (_formKey.currentState.validate()) {
+                                      // If the form is valid, we want to show a loading Snackbar
+                                      setState(() {
+                                        signUp();
+                                        isRegister = false;
+                                        isOTPScreen = true;
+                                      });
+                                    }
+                                  }
+                                },
+                                child: new Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 15.0,
+                                    horizontal: 15.0,
                                   ),
-                                ],
-                              )))
+                                  child: new Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      new Expanded(
+                                        child: Text(
+                                          "Next",
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ))),
                     ],
                   ))
             ],
@@ -259,6 +241,33 @@ class _LoginScreenState extends State<LoginScreen> {
                                               if (user != null)
                                                 {
                                                   //store registration details in firestore database
+                                                  await _firestore
+                                                      .collection('users')
+                                                      .doc(
+                                                          _auth.currentUser.uid)
+                                                      .set(
+                                                          {
+                                                        'name': nameController
+                                                            .text
+                                                            .trim(),
+                                                        'cellnumber':
+                                                            cellnumberController
+                                                                .text
+                                                                .trim(),
+                                                      },
+                                                          SetOptions(
+                                                              merge:
+                                                                  true)).then(
+                                                          (value) => {
+                                                                //then move to authorised area
+                                                                setState(() {
+                                                                  isLoading =
+                                                                      false;
+                                                                  isResend =
+                                                                      false;
+                                                                })
+                                                              }),
+
                                                   setState(() {
                                                     isLoading = false;
                                                     isResend = false;
@@ -268,7 +277,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     MaterialPageRoute(
                                                       builder: (BuildContext
                                                               context) =>
-                                                          // LoggedInScreen(),
                                                           UserProfile(),
                                                     ),
                                                     (route) => false,
@@ -336,7 +344,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   isResend = false;
                                   isLoading = true;
                                 });
-                                await login();
+                                await signUp();
                               },
                               child: new Container(
                                 padding: const EdgeInsets.symmetric(
@@ -363,87 +371,82 @@ class _LoginScreenState extends State<LoginScreen> {
         ]));
   }
 
-  displaySnackBar(text) {
-    // final snackBar = SnackBar(content: Text(text));
-    // _scaffoldKey.currentState.showSnackBar(snackBar);
-    final snackBar = SnackBar(content: Text(text));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-
-  Future login() async {
+  Future signUp() async {
     setState(() {
       isLoading = true;
     });
+    debugPrint('test 1');
+    var phoneNumber = '+60' + cellnumberController.text.trim();
+    // var phoneNumber = cellnumberController.text.trim();
+    debugPrint('test 2');
+    var verifyPhoneNumber = _auth.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: (phoneAuthCredential) {
+        debugPrint('test 3');
+        //auto code complete (not manually)
+        _auth.signInWithCredential(phoneAuthCredential).then((user) async => {
+              if (user != null)
+                {
+                  //store registration details in firestore database
+                  await _firestore
+                      .collection('users')
+                      .doc(_auth.currentUser.uid)
+                      .set({
+                        'name': nameController.text.trim(),
+                        'cellnumber': cellnumberController.text.trim()
+                      }, SetOptions(merge: true))
+                      .then((value) => {
+                            //then move to authorized area
+                            setState(() {
+                              isLoading = false;
+                              isRegister = false;
+                              isOTPScreen = false;
 
-    var phoneNumber = '+60 ' + numberController.text.trim();
-    // var phoneNumber = numberController.text.trim();
-
-    //first we will check if a user with this cell number exists
-    var isValidUser = false;
-    var number = numberController.text.trim();
-
-    await _firestore
-        .collection('users')
-        .where('cellnumber', isEqualTo: number)
-        .get()
-        .then((result) {
-      if (result.docs.length > 0) {
-        isValidUser = true;
-      }
-    });
-
-    if (isValidUser) {
-      //ok, we have a valid user, now lets do otp verification
-      var verifyPhoneNumber = _auth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        verificationCompleted: (phoneAuthCredential) {
-          //auto code complete (not manually)
-          _auth.signInWithCredential(phoneAuthCredential).then((user) async => {
-                if (user != null)
-                  {
-                    //redirect
-                    setState(() {
-                      isLoading = false;
-                      isOTPScreen = false;
-                    }),
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => UserProfile(),
-                      ),
-                      (route) => false,
-                    )
-                  }
-              });
-        },
-        verificationFailed: (FirebaseAuthException error) {
-          displaySnackBar('Validation error, please try again later');
-          setState(() {
-            isLoading = false;
-          });
-        },
-        codeSent: (verificationId, [forceResendingToken]) {
-          setState(() {
-            isLoading = false;
-            verificationCode = verificationId;
-            isOTPScreen = true;
-          });
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          setState(() {
-            isLoading = false;
-            verificationCode = verificationId;
-          });
-        },
-        timeout: Duration(seconds: 60),
-      );
-      await verifyPhoneNumber;
-    } else {
-      //non valid user
-      setState(() {
-        isLoading = false;
-      });
-      displaySnackBar('Number not found, please sign up first');
-    }
+                              //navigate to is
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      UserProfile(),
+                                ),
+                                (route) => false,
+                              );
+                            })
+                          })
+                      .catchError((onError) => {
+                            debugPrint('Error saving user to database.' +
+                                onError.toString())
+                          })
+                }
+            });
+        debugPrint('test 4');
+      },
+      verificationFailed: (FirebaseAuthException error) {
+        debugPrint('Error logging in' + error.message);
+        setState(() {
+          isLoading = false;
+        });
+      },
+      codeSent: (String verificationId, [int forceResendingToken]) async {
+        // this.actualCode = verificationId;
+        debugPrint('test 6');
+        setState(() {
+          print('Code sent to $phoneNumber');
+          isLoading = false;
+          verificationCode = verificationId;
+        });
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        debugPrint('test 7');
+        setState(() {
+          isLoading = false;
+          verificationCode = verificationId;
+        });
+      },
+      timeout: Duration(seconds: 120),
+    );
+    debugPrint('test 7');
+    await verifyPhoneNumber;
+    debugPrint('test 8');
   }
 }

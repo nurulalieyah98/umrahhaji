@@ -7,9 +7,10 @@ class ScreenEbook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Percuma"),
+        centerTitle: true,
       ),
       body: BodyEbook(),
     );

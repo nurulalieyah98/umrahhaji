@@ -147,6 +147,7 @@ class _ListScreenState extends State<ListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Umrah Haji TV'),
+        centerTitle: true,
       ),
       body: _channel != null
           ? NotificationListener<ScrollNotification>(

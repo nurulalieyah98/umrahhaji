@@ -1,6 +1,7 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:umrahhaji/otp/screen/user_profile2.dart';
 import 'package:umrahhaji/pages/home/article_homepage/list_article_homepage.dart';
 import 'package:umrahhaji/pages/home/article_homepage/wp-article-homepage.dart';
 import 'package:umrahhaji/pages/home/product_homepage/list_product_homepage.dart';
@@ -30,9 +31,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        centerTitle: true,
-        title: Text("Laman Utama"),
-      ),
+          centerTitle: true,
+          title: Text("Laman Utama"),
+          automaticallyImplyLeading: false),
       bottomNavigationBar: BubbleBottomBar(
           opacity: 0.2,
           backgroundColor: Colors.white,
@@ -109,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                   child: Text("Profile"),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                        MaterialPageRoute(builder: (context) => UserProfile()));
                   }), //Route to Profile
             ),
           ]),
