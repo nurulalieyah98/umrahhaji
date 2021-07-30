@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:umrahhaji/otp/screen/register_otp.dart';
-import 'package:umrahhaji/otp/screen/user_profile2.dart';
+import 'package:umrahhaji/otp/screen/register_screen.dart';
+import 'package:umrahhaji/pages/home/home_page.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
         context,
         MaterialPageRoute(
           // builder: (BuildContext context) => LoggedInScreen(),
-          builder: (BuildContext context) => UserProfile(),
+          builder: (BuildContext context) => HomePage(),
         ),
         (route) => false,
       );
@@ -64,7 +64,11 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: new AppBar(
-          title: Text('Login with SMS'),
+          title: Text(
+            'Login with SMS',
+            style: TextStyle(color: Colors.black45),
+          ),
+          backgroundColor: Colors.green[100],
         ),
         body: ListView(children: [
           new Column(
@@ -73,20 +77,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   key: _formKey,
                   child: Column(
                     children: [
-                      SizedBox(height: 50.0),
+                      SizedBox(height: 20.0),
                       // SvgPicture.asset(
                       //   "assets/icons/signup.svg",
                       //   height: 0.45,
                       // ),
                       Container(
-                          width: 200.0,
-                          height: 200.0,
+                          width: 300.0,
+                          height: 253.0,
                           decoration: new BoxDecoration(
                               shape: BoxShape.circle,
                               image: new DecorationImage(
                                   fit: BoxFit.fill,
                                   image: new AssetImage(
-                                      'assets/images/login.jpg')))),
+                                      'assets/images/tawafkaabah.png')))),
                       SizedBox(height: 30.0),
                       Container(
                           child: Padding(
@@ -111,12 +115,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       )),
                       Container(
                           // margin: EdgeInsets.only(top: 40, bottom: 5),
+                          color: Colors.lightGreen,
                           margin: EdgeInsets.only(top: 20, bottom: 5),
                           child: Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                                  const EdgeInsets.symmetric(horizontal: 0.0),
                               child: !isLoading
                                   ? new ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.lightGreen,
+                                      ),
                                       onPressed: () async {
                                         if (!isLoading) {
                                           if (_formKey.currentState
@@ -127,6 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         }
                                       },
                                       child: Container(
+                                          color: Colors.lightGreen,
+                                          width: 200,
                                           padding: const EdgeInsets.symmetric(
                                             vertical: 15.0,
                                             horizontal: 15.0,
@@ -166,6 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   InkWell(
                                     child: Text(
                                       'Sign up',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     onTap: () => {
                                       Navigator.push(
@@ -188,7 +200,11 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: new AppBar(
-          title: Text('OTP Screen'),
+          title: Text(
+            'OTP Screen',
+            style: TextStyle(color: Colors.black45),
+          ),
+          backgroundColor: Colors.green[100],
         ),
         body: ListView(children: [
           Form(
@@ -196,6 +212,9 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 30,
+                ),
                 Container(
                     child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -233,11 +252,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     : Container(),
                 !isLoading
                     ? Container(
+                        //color: Colors.green,
+                        width: 150,
                         margin: EdgeInsets.only(top: 40, bottom: 5),
                         child: Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                             child: new ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.lightGreen,
+                              ),
                               onPressed: () async {
                                 if (_formKeyOTP.currentState.validate()) {
                                   // If the form is valid, we want to show a loading Snackbar
@@ -269,7 +293,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       builder: (BuildContext
                                                               context) =>
                                                           // LoggedInScreen(),
-                                                          UserProfile(),
+                                                          HomePage(),
                                                     ),
                                                     (route) => false,
                                                   )
@@ -331,6 +355,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                             child: new ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.lightGreen,
+                              ),
                               onPressed: () async {
                                 setState(() {
                                   isResend = false;
@@ -409,7 +436,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => UserProfile(),
+                        builder: (BuildContext context) => HomePage(),
                       ),
                       (route) => false,
                     )

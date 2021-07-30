@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<List> fetchWpPostsArticle() async {
+Future<List> fetchWpPosts() async {
   var url = Uri.parse(
       "https://umrahhaji.com/index.php/wp-json/wp/v2/posts?per_page=4&order=desc&orderby=date&status=publish");
 

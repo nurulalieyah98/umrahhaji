@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:umrahhaji/google/page/home_page.dart';
 import 'package:umrahhaji/otp/components/card_contactus.dart';
 import 'package:umrahhaji/otp/components/card_profile.dart';
 import 'package:umrahhaji/pages/contact_us/launch.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
-import 'package:umrahhaji/otp/screen/login_otp.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 var userName = '';
+var displayName = '';
 final _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class UserProfile extends StatefulWidget {
@@ -24,6 +25,7 @@ class _UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     getUser();
+    // getName();
     super.initState();
   }
 
@@ -61,10 +63,12 @@ class _UserProfileState extends State<UserProfile> {
                   children: <Widget>[
                     CardProfile(
                       title: 'Name : ',
-                      data: userName,
-                      //data: _auth.currentUser.displayName != null
-                      // ? _auth.currentUser.displayName
-                      // : ''
+                      // data: userName,
+                      data: displayName ,
+                      // data: getName(),
+                      // data: _auth.currentUser.displayName != null
+                      //     ? _auth.currentUser.displayName
+                      //     : userName,
                     ),
                     CardProfile(
                         title: 'Email : ',
@@ -72,7 +76,7 @@ class _UserProfileState extends State<UserProfile> {
                             ? _auth.currentUser.email
                             : ''),
                     CardProfile(
-                      title: 'Phone Number : ',
+                      title: 'Phone : ',
                       data: (_auth.currentUser.phoneNumber != null
                           ? _auth.currentUser.phoneNumber
                           : ''),
@@ -136,6 +140,40 @@ class _UserProfileState extends State<UserProfile> {
                             url: "https://www.facebook.com/umrahhajiofficial/");
                       },
                     ),
+                    CardContactUs(
+                      title: 'Telegram',
+                      icon: Icon(
+                        FontAwesomeIcons.telegram,
+                        color: Colors.lightBlueAccent,
+                      ),
+                      onPressed: () {
+                        LaunchUrl.launchUniversalLinkIos(
+                            url: "https://t.me/NotaUmrahHaji");
+                      },
+                    ),
+                    CardContactUs(
+                      title: 'Twitter',
+                      icon: Icon(
+                        FontAwesomeIcons.twitter,
+                        color: Colors.blueAccent,
+                      ),
+                      onPressed: () {
+                        LaunchUrl.launchUniversalLinkIos(
+                            url: "https://twitter.com/ComUmrahhaji");
+                      },
+                    ),
+                    CardContactUs(
+                      title: 'Jemaah Umrah Haji Malaysia',
+                      icon: Icon(
+                        FontAwesomeIcons.kaaba,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        LaunchUrl.launchUniversalLinkIos(
+                            url:
+                                "https://www.facebook.com/groups/2785127388276138/?ref=share");
+                      },
+                    ),
                     Divider(
                       thickness: 15.0,
                       color: Colors.grey,
@@ -165,6 +203,7 @@ class _UserProfileState extends State<UserProfile> {
 
   Future getUser() async {
     if (_auth.currentUser != null) {
+      displayName = _auth.currentUser.displayName;
       var cellNumber = _auth.currentUser.phoneNumber;
       cellNumber =
           '0' + _auth.currentUser.phoneNumber.substring(3, cellNumber.length);
@@ -176,7 +215,7 @@ class _UserProfileState extends State<UserProfile> {
           .then((result) {
         if (result.docs.length > 0) {
           setState(() {
-            userName = result.docs[0].data()['name'];
+            displayName = result.docs[0].data()['name'];
           });
         }
       });
@@ -185,7 +224,33 @@ class _UserProfileState extends State<UserProfile> {
 
   signOut() {
     //redirect
-    _auth.signOut().then((value) => Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (BuildContext context) => LoginScreen())));
+    _auth.signOut().then((value) => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => HomePageGoogle())));
+  }
+
+  Future getName() async {
+    if (_auth.currentUser.displayName != null) {
+      displayName = _auth.currentUser.displayName;
+      return (displayName);
+    } else {
+      var cellNumber = _auth.currentUser.phoneNumber;
+      cellNumber =
+          '0' + _auth.currentUser.phoneNumber.substring(3, cellNumber.length);
+      debugPrint(cellNumber);
+      await _firestore
+          .collection('users')
+          .where('cellnumber', isEqualTo: cellNumber)
+          .get()
+          .then((result) {
+        if (result.docs.length > 0) {
+          setState(() {
+            displayName = result.docs[0].data()['name'];
+          });
+        }
+        return (displayName);
+      });
+    }
   }
 }

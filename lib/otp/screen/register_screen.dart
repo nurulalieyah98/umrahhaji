@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:umrahhaji/otp/screen/user_profile2.dart';
-import 'package:umrahhaji/otp/screen/components/loggedIn_screen.dart';
+import 'package:umrahhaji/otp/screen/components/user_profile.dart';
+import 'package:umrahhaji/pages/home/home_page.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -55,7 +55,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: new AppBar(
-          title: Text('Register new user'),
+          title: Text(
+            'Register new user',
+            style: TextStyle(color: Colors.black45),
+          ),
+          backgroundColor: Colors.green[100],
         ),
         body: ListView(children: [
           new Column(
@@ -70,14 +74,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       //   height: 0.45,
                       // ),
                       Container(
-                          width: 200.0,
+                          width: 280.0,
                           height: 200.0,
                           decoration: new BoxDecoration(
                               shape: BoxShape.circle,
                               image: new DecorationImage(
                                   fit: BoxFit.fill,
                                   image: new AssetImage(
-                                      'assets/images/signup.jpg')))),
+                                      'assets/images/kaabah.jpg')))),
                       SizedBox(height: 30.0),
                       Container(
                           child: Padding(
@@ -130,6 +134,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
                               child: new ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.lightGreen,
+                                ),
                                 onPressed: () {
                                   if (!isLoading) {
                                     if (_formKey.currentState.validate()) {
@@ -143,6 +150,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   }
                                 },
                                 child: new Container(
+                                  color: Colors.lightGreen,
+                                  width: 100,
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 15.0,
                                     horizontal: 15.0,
@@ -171,7 +180,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: new AppBar(
-          title: Text('OTP Screen'),
+          title: Text(
+            'OTP Screen',
+            style: TextStyle(color: Colors.black45),
+          ),
+          backgroundColor: Colors.green[100],
         ),
         body: ListView(children: [
           Form(
@@ -179,6 +192,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 30,
+                ),
                 Container(
                     child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -216,11 +232,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     : Container(),
                 !isLoading
                     ? Container(
+                        //color: Colors.lightGreen,
                         margin: EdgeInsets.only(top: 40, bottom: 5),
                         child: Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                             child: new ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.lightGreen,
+                              ),
                               onPressed: () async {
                                 if (_formKeyOTP.currentState.validate()) {
                                   // If the form is valid, we want to show a loading Snackbar
@@ -276,10 +296,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   Navigator.pushAndRemoveUntil(
                                                     context,
                                                     MaterialPageRoute(
-                                                      builder: (BuildContext
-                                                              context) =>
-                                                          UserProfile(),
-                                                    ),
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            HomePage()),
                                                     (route) => false,
                                                   )
                                                 }
@@ -302,6 +321,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 }
                               },
                               child: new Container(
+                                //color: Colors.lightGreen,
+                                width: 100,
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 15.0,
                                   horizontal: 15.0,
@@ -408,7 +429,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      LoggedInScreen(),
+                                      UserProfile(),
                                 ),
                                 (route) => false,
                               );

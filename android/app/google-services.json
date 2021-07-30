@@ -14,6 +14,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "606389515367-9n4rkgjid7dsme2lu2a7p54o3hvl3sk6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.umrahhaji",
+            "certificate_hash": "59a1b34fc0abbb39231000b35e439215bae707f0"
+          }
+        },
+        {
+          "client_id": "606389515367-c0p7tc15e25ks2f1ani7krkf0fcrukkp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.umrahhaji",
+            "certificate_hash": "1ba3f6025037e6111f98a12602bb805e182c0604"
+          }
+        },
+        {
+          "client_id": "606389515367-cus2tfi9f2lvhfvnm41aqsr8ajq5jne3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.umrahhaji",
+            "certificate_hash": "8f258a62ed48b5be5443603c32a2bd405a4459cb"
+          }
+        },
+        {
+          "client_id": "606389515367-fhrg8po30o15k75um861e5n0cpus3hln.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.umrahhaji",
+            "certificate_hash": "99529a2bb11768f7086de7a1cf0d0ecebbca22d5"
+          }
+        },
+        {
           "client_id": "606389515367-u07vbra1me39l7v6q255jfqekjq92hh9.apps.googleusercontent.com",
           "client_type": 3
         }

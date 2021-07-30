@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:umrahhaji/pages/artikel/artikel-home.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_home.dart';
 
 class PostHome extends StatelessWidget {
@@ -50,7 +51,7 @@ class PostHome extends StatelessWidget {
         body: TabBarView(
           children: <Widget>[
             ArticleHome(0xff000000),
-            ArticleHome(0xff000000),
+            QnAHome(0xff000000),
           ],
         ),
       ),

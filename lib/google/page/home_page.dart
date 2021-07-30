@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:umrahhaji/google/provider/google_sign_in.dart';
-import 'package:umrahhaji/google/widget/background_painter.dart';
-import 'package:umrahhaji/google/widget/logged_in_widget.dart';
 import 'package:umrahhaji/google/widget/sign_up_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:umrahhaji/pages/home/home_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePageGoogle extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: ChangeNotifierProvider(
@@ -19,7 +18,7 @@ class HomePage extends StatelessWidget {
               if (provider.isSigningIn) {
                 return buildLoading();
               } else if (snapshot.hasData) {
-                return LoggedInWidget();
+                return HomePage();
               } else {
                 return SignUpWidget();
               }
@@ -31,7 +30,7 @@ class HomePage extends StatelessWidget {
   Widget buildLoading() => Stack(
         fit: StackFit.expand,
         children: [
-          CustomPaint(painter: BackgroundPainter()),
+          //CustomPaint(painter: BackgroundPainter()),
           Center(child: CircularProgressIndicator()),
         ],
       );

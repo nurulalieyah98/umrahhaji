@@ -7,16 +7,15 @@ import 'package:umrahhaji/pages/soal_jawab/qna_umrah/list_qna_umrah.dart';
 import 'package:umrahhaji/pages/soal_jawab/qna_umrah_haji/list_qna_umrah_haji.dart';
 
 // ignore: must_be_immutable
-class ArticleHome extends StatefulWidget {
-  ArticleHome(this.colorVal);
+class QnAHome extends StatefulWidget {
+  QnAHome(this.colorVal);
   int colorVal;
 
   @override
-  _ArticleHomeState createState() => _ArticleHomeState();
+  _QnAHomeState createState() => _QnAHomeState();
 }
 
-class _ArticleHomeState extends State<ArticleHome>
-    with SingleTickerProviderStateMixin {
+class _QnAHomeState extends State<QnAHome> with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override

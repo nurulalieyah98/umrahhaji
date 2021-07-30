@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:umrahhaji/google/provider/google_sign_in.dart';
 import 'package:provider/provider.dart';
+//import 'package:umrahhaji/provider/google_sign_in.dart';
+//import 'package:provider/provider.dart';
+import 'package:umrahhaji/google/provider/google_sign_in.dart';
 
 class LoggedInWidget extends StatelessWidget {
   @override
@@ -37,6 +39,7 @@ class LoggedInWidget extends StatelessWidget {
           SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
+              // AuthService().signOut();
               final provider =
                   Provider.of<GoogleSignInProvider>(context, listen: false);
               provider.logout();

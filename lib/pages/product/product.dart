@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+// ignore: must_be_immutable
 class ProductPage extends StatelessWidget {
   WebViewController controller;
   @override
@@ -23,7 +24,7 @@ class ProductPage extends StatelessWidget {
               appBar: AppBar(
                 title: Text('Kelengkapan Umrah Haji'),
                 centerTitle: true,
-                backgroundColor: Colors.teal,
+                backgroundColor: Colors.green[100],
                 leading: BackButton(
                     color: Colors.white,
                     onPressed: () => Navigator.push(context,

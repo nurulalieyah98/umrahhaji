@@ -200,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                       height: 10.0,
                     ),
                     FutureBuilder(
-                      future: fetchWpPostsArticle(),
+                      future: fetchWpPosts(),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return ListView.builder(
@@ -210,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                             itemBuilder: (BuildContext context, int index) {
                               Map wppost = snapshot.data[index];
 
-                              return PostTileArticle(
+                              return PostTile(
                                 href: wppost["_links"]["wp:featuredmedia"][0]
                                     ["href"],
                                 title: wppost["title"]["rendered"]
