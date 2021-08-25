@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:umrahhaji/google/page/home_page.dart';
-import 'package:umrahhaji/otp/components/card_contactus.dart';
-import 'package:umrahhaji/otp/components/card_profile.dart';
 import 'package:umrahhaji/pages/contact_us/launch.dart';
 import 'package:umrahhaji/pages/home/home_page.dart';
+import 'package:umrahhaji/pages/profile/components/card_contactus.dart';
+import 'package:umrahhaji/pages/profile/components/card_profile.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -64,7 +64,7 @@ class _UserProfileState extends State<UserProfile> {
                     CardProfile(
                       title: 'Name : ',
                       // data: userName,
-                      data: displayName ,
+                      data: displayName,
                       // data: getName(),
                       // data: _auth.currentUser.displayName != null
                       //     ? _auth.currentUser.displayName

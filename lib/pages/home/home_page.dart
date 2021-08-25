@@ -589,11 +589,12 @@
 
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:umrahhaji/otp/screen/user_profile2.dart';
 import 'package:umrahhaji/pages/home/article_homepage/list_article_homepage.dart';
 import 'package:umrahhaji/pages/home/article_homepage/wp-article-homepage.dart';
 import 'package:umrahhaji/pages/modul%20ebook/screen_ebook.dart';
 import 'package:umrahhaji/pages/product/product.dart';
+import 'package:umrahhaji/pages/profile/testing/testing_home.dart';
+import 'package:umrahhaji/pages/profile/testing/testing_profile.dart';
 import 'package:umrahhaji/pages/soal_jawab/post_home.dart';
 import 'package:umrahhaji/pages/umrahhaji_tv/list_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -635,13 +636,13 @@ class _HomePageState extends State<HomePage> {
                   child: Icon(Icons.home, color: Colors.black),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                        MaterialPageRoute(builder: (context) => Home()));
                   }), //Route to HomePage
               title: GestureDetector(
                   child: Text("Home"),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                        MaterialPageRoute(builder: (context) => Home()));
                   }), //Route to HomePage
             ),
             BubbleBottomBarItem(

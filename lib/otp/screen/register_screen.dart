@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import 'package:umrahhaji/models/users_model.dart';
 import 'package:umrahhaji/otp/screen/components/user_profile.dart';
-import 'package:umrahhaji/pages/home/home_page.dart';
+import 'package:umrahhaji/wrapper.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key key}) : super(key: key);
+  final String uid;
+  RegisterScreen({this.uid});
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -20,9 +22,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKeyOTP = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController nameController = new TextEditingController();
+  final TextEditingController emailController = new TextEditingController();
   final TextEditingController cellnumberController =
       new TextEditingController();
   final TextEditingController otpController = new TextEditingController();
+  final Users users = Users();
 
   var isLoading = false;
   var isResend = false;
@@ -40,6 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void dispose() {
     // Clean up the controller when the Widget is disposed
     nameController.dispose();
+    emailController.dispose();
     cellnumberController.dispose();
     otpController.dispose();
     super.dispose();
@@ -99,6 +104,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Please enter a name';
+                            }
+                            return null;
+                          },
+                        ),
+                      )),
+                      Container(
+                          child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10.0),
+                        child: TextFormField(
+                          enabled: !isLoading,
+                          controller: emailController,
+                          textInputAction: TextInputAction.next,
+                          onEditingComplete: () => node.nextFocus(),
+                          decoration: InputDecoration(
+                              labelText: 'Email',
+                              border: OutlineInputBorder(),
+                              suffixIcon: Icon(Icons.email)),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please enter a email';
                             }
                             return null;
                           },
@@ -271,6 +297,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                         'name': nameController
                                                             .text
                                                             .trim(),
+                                                        'email': emailController
+                                                            .text
+                                                            .trim(),
                                                         'cellnumber':
                                                             cellnumberController
                                                                 .text
@@ -298,7 +327,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                     MaterialPageRoute(
                                                         builder: (BuildContext
                                                                 context) =>
-                                                            HomePage()),
+                                                            Wrapper()),
                                                     (route) => false,
                                                   )
                                                 }
@@ -415,6 +444,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       .doc(_auth.currentUser.uid)
                       .set({
                         'name': nameController.text.trim(),
+                        'email': emailController.text.trim(),
                         'cellnumber': cellnumberController.text.trim()
                       }, SetOptions(merge: true))
                       .then((value) => {

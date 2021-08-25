@@ -16,15 +16,18 @@ class GoogleSignupButtonWidget extends StatelessWidget {
             shape: StadiumBorder(),
             padding: EdgeInsets.symmetric(horizontal: 23, vertical: 8),
           ),
-          // highlightedBorderColor: Colors.black,
-          // borderSide: BorderSide(color: Colors.black),
-          // textColor: Colors.black,
-          
-          icon: FaIcon(FontAwesomeIcons.google, color: Colors.red,),
+          icon: FaIcon(
+            FontAwesomeIcons.google,
+            color: Colors.red,
+          ),
           onPressed: () {
             final provider =
                 Provider.of<GoogleSignInProvider>(context, listen: false);
             provider.login();
+
+            // final user = FirebaseAuth.instance.currentUser;
+
+            // if (user != null) {}
           },
         ),
       );

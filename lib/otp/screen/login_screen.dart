@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:umrahhaji/otp/screen/register_screen.dart';
-import 'package:umrahhaji/pages/home/home_page.dart';
+import 'package:umrahhaji/wrapper.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
         context,
         MaterialPageRoute(
           // builder: (BuildContext context) => LoggedInScreen(),
-          builder: (BuildContext context) => HomePage(),
+          builder: (BuildContext context) => Wrapper(),
         ),
         (route) => false,
       );
@@ -290,11 +290,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   Navigator.pushAndRemoveUntil(
                                                     context,
                                                     MaterialPageRoute(
-                                                      builder: (BuildContext
-                                                              context) =>
-                                                          // LoggedInScreen(),
-                                                          HomePage(),
-                                                    ),
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            // LoggedInScreen(),
+                                                            Wrapper()),
                                                     (route) => false,
                                                   )
                                                 }
@@ -436,8 +435,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => HomePage(),
-                      ),
+                          builder: (BuildContext context) => Wrapper()),
                       (route) => false,
                     )
                   }

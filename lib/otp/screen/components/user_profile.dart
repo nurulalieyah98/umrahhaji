@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:umrahhaji/otp/components/card_profile.dart';
+import 'package:umrahhaji/pages/profile/components/card_profile.dart';
 import 'package:umrahhaji/otp/screen/login_screen.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
