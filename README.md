@@ -38,3 +38,5 @@ samples, guidance on mobile development, and a full API reference.
 "# umrahhaji" 
 "# umrahhaji" 
 "# edit profile otp" 
+"#edit profile" 
+"# edit profile google" 

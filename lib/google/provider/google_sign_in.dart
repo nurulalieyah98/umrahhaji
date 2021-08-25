@@ -56,10 +56,10 @@ class GoogleSignInProvider extends ChangeNotifier {
 
     await FirebaseAuth.instance.signInWithCredential(credential);
 
-    if (user != null) {
-      assert(user.email != null);
-      assert(user.displayName != null);
-      assert(user.photoUrl != null);
+    if (user == null) {
+      // assert(user.email != null);
+      // assert(user.displayName != null);
+      // assert(user.photoUrl != null);
 
       name = user.displayName;
       email = user.email;
@@ -76,27 +76,12 @@ class GoogleSignInProvider extends ChangeNotifier {
             .doc(currentUser.uid)
             .set({
           'email': email,
-          'image': imageUrl,
           'name': name,
           'cellnumber': '',
         });
       });
     }
     isSigningIn = false;
-  }
-
-  Future updateUserData(
-      String email, String name, String cellnumber, imageUrl) async {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    return await FirebaseFirestore.instance
-        .collection('users')
-        .doc(currentUser.uid)
-        .set({
-      uid: currentUser.uid,
-      'name': name,
-      'email': email,
-      'cellnumber': cellnumber
-    });
   }
 
   void logout() async {

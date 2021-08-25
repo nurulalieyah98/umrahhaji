@@ -409,7 +409,7 @@ class _HomeState extends State<Home> {
           return Container(
             color: Colors.white,
             child: SpinKitRing(
-              color: Colors.orange,
+              color: Colors.purple,
             ),
           );
         }
