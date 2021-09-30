@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:umrahhaji/facebook/widget/facebook_signup_button.dart';
+import 'package:umrahhaji/email/widget/email_signup_button_widget.dart.dart';
 //import 'package:umrahhaji/google/widget/background_painter.dart';
 //import 'package:umrahhaji/google/widget/background_painter.dart';
-import 'package:umrahhaji/google/widget/google_signup_button_widget.dart';
 import 'package:umrahhaji/otp/widget/phone_signup_button_widget.dart';
 
 class SignUpWidget extends StatelessWidget {
@@ -54,8 +53,9 @@ class SignUpWidget extends StatelessWidget {
               height: 20,
             ),
             PhoneSignupButtonWidget(),
-            GoogleSignupButtonWidget(),
-            FacebookSignupButtonWidget(),
+            EmailSignupButtonWidget(),
+            // GoogleSignupButtonWidget(),
+            // FacebookSignupButtonWidget(),
             // FacebookSignupButtonWidget(),
             SizedBox(height: 12),
             // Text(

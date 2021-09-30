@@ -4,7 +4,6 @@ import 'package:umrahhaji/google/provider/google_sign_in.dart';
 import 'package:umrahhaji/google/widget/sign_up_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:umrahhaji/models/users_model.dart';
-import 'package:umrahhaji/pages/profile/testing/testing_home.dart';
 import 'package:umrahhaji/wrapper.dart';
 
 class HomePageGoogle extends StatelessWidget {
